@@ -1,0 +1,45 @@
+<table class='table'>
+  <tr><%= attachment_image_tag(user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %></tr>
+  <tr>
+	  <th>name</th>
+	  <th><%= user.name %></th>
+  </tr>
+  <tr>
+	  <th>introduction</th>
+	  <th><%= user.introduction %></th>
+  </tr>
+  <tr>
+	   <td>フォロー数：</td>
+	   <td>
+	     <%= link_to follow_path do %>
+	       <%= user.follower.count %>
+	     <% end %>人
+	   </td>
+  </tr>
+  <tr>
+    <td>フォロワー数：</td>
+    <td>
+      <%= link_to follower_path do %>
+        <%= user.follow.count %>
+      <% end %>人</td>
+  </tr>
+</table>
+
+<% if user != current_user %>
+  <div class='row'>
+    <% if user.follow.any? %>
+    <!--重要！レコードを一致させる！エライ！！★★★-->
+      <%= link_to user_relationships_path(user), class: "btn btn-block btn-danger", method: :delete do %>
+        フォローを外す
+      <% end %>
+    <% else %>
+      <%= link_to user_relationships_path(user), class: "btn btn-block btn-success", method: :post do %>
+        フォローする
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <div class='row'>
+    <%= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
+  </div>
+<% end %>
