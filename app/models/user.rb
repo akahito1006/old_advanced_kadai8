@@ -19,5 +19,17 @@ class User < ApplicationRecord
 
   validates :name, length: {maximum: 20, minimum: 2}, uniqueness: true
   validates :introduction, length: {maximum: 50}
+  
+  def self.looks(matching_option, word_for_search)
+    if matching_option == "same_word"
+    	@user = User.where(name: word_for_search)
+    elsif matching_option == "front_match"
+    	@user = User.where("name LIKE ?", "#{word_for_search}%")
+    elsif matching_option == "tail_match"
+    	@user = User.where("name LIKE ?", "%#{word_for_search}")
+    else
+    	@user = User.where("name LIKE ?", "%#{word_for_search}%")
+    end
+  end
+  
 end
-

@@ -9,4 +9,16 @@ class Book < ApplicationRecord
 	def favorited_by?(user)
 		favorites.where(user_id: user.id).exists?
 	end
+	
+	def self.looks(matching_option, word_for_search)
+		if matching_option == "same_word"
+			@book = Book.where(title: word_for_search)
+		elsif matching_option == "front_match"
+			@book = Book.where("title LIKE ?", "#{word_for_search}%")
+		elsif matching_option == "tail_match"
+			@book = Book.where("title LIKE ?", "%#{word_for_search}")
+		else
+			@book = Book.where("title LIKE ?", "%#{word_for_search}%")
+		end
+	end
 end
