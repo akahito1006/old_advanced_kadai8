@@ -1,1 +1,2 @@
-$('.favorite_btn_<%= @book.id %>').html("<%= escape_javascript(render partial: 'favorites/favorite-btn', locals: {book: @book}) %>");
+$('.del_comment').html("<%= escape_javascript(render partial: 'book_comments/comment_list') %>");
+
