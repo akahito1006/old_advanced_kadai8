@@ -28,6 +28,10 @@ class User < ApplicationRecord
     end
   end
   
+  def followed_by?(user)
+		followers.include?(user)
+	end
+  
   include JpPrefecture
   jp_prefecture :prefecture_code
   
