@@ -1,6 +1,0 @@
-<h2><%= "#{@range_option}" %> search for "<%= "#{@word_for_search}" %>"</h2>
-<% if @range_option == "Users" %>
-    <%= render 'users/index',users: @users %>
-<% else %>
-    <%= render 'books/index',books: @books %>
-<% end %>
