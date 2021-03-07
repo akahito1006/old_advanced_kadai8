@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bookers2-likeandcomment</title>
+    <title>Bookers2-debug</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -12,20 +12,6 @@
     <%= render 'layouts/header' %>
       <main>
         <p id="notice"><%= notice %></p>
-        <% if user_signed_in? %>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 offset-md-4">
-              <%= form_with url: search_path, method: :get, local: true do |f| %>
-                <%= f.text_field :word_for_search %>
-                <%= f.select :range_option, options_for_select([['Users'], ['Books']]) %>
-                <%= f.select :matching_option, options_for_select([['完全一致', 'same_word'], ['前方一致' , 'front_match'], ['後方一致', 'tail_match'], ['部分一致', 'partial_match']]) %>
-                <%= f.submit "検索" %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-        <% end %>
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>
